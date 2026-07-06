@@ -1,0 +1,29 @@
+﻿@model IEnumerable<appTest.Models.Produit>
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+
+    <h3>Créer un produit</h3>
+    //ajout
+    <p><a asp-controller="Produit" asp-action="Create" class="btn btn-primary">+ Add Product</a></p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prix</th>
+                <th>Quantité</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Produit in Model)
+            {
+                <tr>
+                    <td>@Produit.Id</td>
+                    <td>@Produit.Nom</td>
+                    <td>@Produit.Prix</td>
+                    <td>@Produit.Quantite</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
