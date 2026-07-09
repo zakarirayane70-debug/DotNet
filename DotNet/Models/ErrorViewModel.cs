@@ -1,4 +1,4 @@
-namespace DotNet.Models
+namespace appTest.Models
 {
     public class ErrorViewModel
     {
