@@ -46,47 +46,51 @@ namespace appTest.Controllers
             }
             return View(produit);
         }
+        public ActionResult Delete(int id)
+        {
+            var produitDB = _context.Produits.SingleOrDefault(Produit => Produit.Id == id);
+            if (produitDB == null)
+            {
+                return NotFound();
+            }
+            _context.Produits.Remove(produitDB);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        //get : ProduitController/Edit
+        public ActionResult Edit(int id)
+        {
+            var produitDB = _context.Produits.SingleOrDefault(Produit => Produit.Id == id);
+            if (produitDB == null)
+            {
+                return NotFound();
+            }
+            return View(produitDB);
+        }
+            //post : ProduitController/Edit/5
+            [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(Produit produit)
+        {
+            
+            var exist = _context.Produits.SingleOrDefault(Produit => Produit.Id == produit.Id);
+            if (exist == null)
+            {
+                return NotFound();
+            }
+           
+            if (ModelState.IsValid)
+            {
+                exist.Id = produit.Id;
+                exist.Nom = produit.Nom;
+                exist.Prix = produit.Prix;
+                exist.Quantite = produit.Quantite;
+                _context.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(produit);
+        }
 
-        /* // GET: ProduitController/Edit/5
-         public ActionResult Edit(int id)
-         {
-             return View();
-         }
-
-         // POST: ProduitController/Edit/5
-         [HttpPost]
-         [ValidateAntiForgeryToken]
-         public ActionResult Edit(int id, IFormCollection collection)
-         {
-             try
-             {
-                 return RedirectToAction(nameof(Index));
-             }
-             catch
-             {
-                 return View();
-             }
-         }
-
-         // GET: ProduitController/Delete/5
-         public ActionResult Delete(int id)
-         {
-             return View();
-         }
-
-         // POST: ProduitController/Delete/5
-         [HttpPost]
-         [ValidateAntiForgeryToken]
-         public ActionResult Delete(int id, IFormCollection collection)
-         {
-             try
-             {
-                 return RedirectToAction(nameof(Index));
-             }
-             catch
-             {
-                 return View();
-             }
-         }*/
     }
-}
+
+    }

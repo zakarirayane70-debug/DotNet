@@ -1,0 +1,26 @@
+﻿@model appTest.Models.Produit
+
+<div class="text-center">
+    <h3 class="display-4">modification de produit</h3>
+</div>
+
+<form asp-action="Edit" method="post">
+    <h3>Modifier </h3>
+    <label class="mt-4">Id:</label>
+    <input class="form-control" type="number" asp-for="Id" readonly>
+    <br />
+    <label class="mt-4"> Nom:</label>
+    <input class="form-control" type="text" asp-for="Nom" />
+    <br />
+    <label class="mt-4">Prix:</label>
+    <input class="form-control" type="number" asp-for="Prix" />
+    <br />
+
+    <label class="mt-4" for="Quantité">Quantité:</label>
+    <input class="form-control" type="number" asp-for="Quantite" />
+
+    <br />
+    <button type="submit">enregistrer</button>
+    <button type="reset">supprimer</button>
+    <a href="/Produit">Annuler</a>
+</form>
