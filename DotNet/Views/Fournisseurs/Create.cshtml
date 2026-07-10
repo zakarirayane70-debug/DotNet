@@ -1,19 +1,17 @@
-﻿@model appTest.Models.Categorie
+﻿@model appTest.Models.Fournisseurs
 
 <div class="text-center">
-    <h3 class="display-4">Création de categorie</h3>
+    <h3 class="display-4">Ajouter un fournisseur</h3>
 </div>
 
 <form asp-action="Create" method="post">
-    <label class="mt-4"> Id de la categorie:</label>
+    <label class="mt-4"> Id du fournisseur:</label>
     <input class="form-control" type="number" asp-for="Id">
     <br />
-    <label class="mt-4"> Nom de la categorie:</label>
+    <label class="mt-4"> Nom du fournisseure:</label>
     <input class="form-control" type="text" asp-for="Nom" />
     <br />
     <button type="submit">enregistrer</button>
     <button type="reset">supprimer</button>
     <a asp-action="Index">Annuler</a>
 </form>
-
-  

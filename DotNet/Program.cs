@@ -10,9 +10,12 @@ builder.Services.AddControllersWithViews();
 //le prob de bases de données
 builder.Services.AddDbContext<CategorieDB>(options =>
     options.UseInMemoryDatabase("CategorieDB"));
+
 builder.Services.AddDbContext<appTestDB>(options =>
     options.UseInMemoryDatabase("appTestDB"));
 
+builder.Services.AddDbContext<FournisseursDB>(options =>
+    options.UseInMemoryDatabase("FournisseursDB"));
 var app = builder.Build();
 
 // Au démarrage : créer la base de données en mémoire et la table Produits automatiquement

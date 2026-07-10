@@ -12,7 +12,6 @@ namespace appTest.Controllers
         {
             _context = context;
         }
-
         // GET: CategorieController
         public IActionResult Index()
         {
@@ -49,8 +48,7 @@ namespace appTest.Controllers
         }
         // GET: CategorieController/Edit/5
         public ActionResult Edit(int id)
-            //todo 
-        {
+    {
             var exist = _context.Categories.SingleOrDefault(Categorie => Categorie.Id == id);
             if (exist == null)
             {
@@ -58,7 +56,7 @@ namespace appTest.Controllers
             }
             return View(exist);
         }
-
+        //todo    
         // POST: CategorieController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -76,7 +74,6 @@ namespace appTest.Controllers
             return View(categorie);
         }
 
-
         // POST: CategorieController/Delete
         public ActionResult Delete(int id)
         {
@@ -90,5 +87,3 @@ namespace appTest.Controllers
             }
         }
 }
-
-
