@@ -12,6 +12,9 @@ namespace appTest.Controllers
         {
             _context = context;
         }
+
+
+
         // GET: CategorieController
         public IActionResult Index()
         {
@@ -48,15 +51,24 @@ namespace appTest.Controllers
         }
         // GET: CategorieController/Edit/5
         public ActionResult Edit(int id)
+
     {
+
+            //todo 
+        {
+
             var exist = _context.Categories.SingleOrDefault(Categorie => Categorie.Id == id);
             if (exist == null)
             {
                 return NotFound();
             }
+
             return View(exist);
         }
         //todo    
+        }
+
+
         // POST: CategorieController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -74,7 +86,14 @@ namespace appTest.Controllers
             return View(categorie);
         }
 
+
         // POST: CategorieController/Delete
+
+
+        // POST: CategorieController/Delete
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
         public ActionResult Delete(int id)
         {
             var CategorieDB = _context.Categories.SingleOrDefault(Categorie => Categorie.Id == id);
@@ -83,7 +102,9 @@ namespace appTest.Controllers
             }
             _context.Categories.Remove(CategorieDB);
             _context.SaveChanges();
+
             return RedirectToAction(nameof(Index));
             }
         }
 }
+
