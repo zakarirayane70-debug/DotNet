@@ -6,8 +6,8 @@ namespace appTest.Controllers
 {
     public class FournisseursController : Controller
     {
-        private readonly FournisseursDB _context;
-        public FournisseursController(FournisseursDB context)
+        private readonly appTestDB _context;
+        public FournisseursController(appTestDB context)
         {
             _context = context;
         }

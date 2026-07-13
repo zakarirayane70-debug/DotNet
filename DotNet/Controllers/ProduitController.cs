@@ -15,7 +15,7 @@ namespace appTest.Controllers
         // GET: ProduitController
         public IActionResult Index()
         {
-            var produits = _context.Produits.ToList();
+            var produits = _context.Medicaments.ToList();
             return View(produits);
         }
 
@@ -36,7 +36,7 @@ namespace appTest.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         //dyl sécurité pour éviter les attaques CSRF 
-        public ActionResult Create(Produit produit)
+        public ActionResult Create(Medicament Medicaments)
         {
             if (ModelState.IsValid)
             {
@@ -70,7 +70,7 @@ namespace appTest.Controllers
             //post : ProduitController/Edit/5
             [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Produit produit)
+        public ActionResult Edit(Medicament produit)
         {
             
             var exist = _context.Produits.SingleOrDefault(Produit => Produit.Id == produit.Id);

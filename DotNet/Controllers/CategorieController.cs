@@ -7,8 +7,8 @@ namespace appTest.Controllers
     public class CategorieController : Controller
        
     {
-        private readonly CategorieDB _context;
-        public CategorieController(CategorieDB context)
+        private readonly appTestDB _context;
+        public CategorieController(appTestDB context)
         {
             _context = context;
         }

@@ -8,22 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 //le prob de bases de données
-builder.Services.AddDbContext<CategorieDB>(options =>
-    options.UseInMemoryDatabase("CategorieDB"));
-
 builder.Services.AddDbContext<appTestDB>(options =>
-    options.UseInMemoryDatabase("appTestDB"));
-
-builder.Services.AddDbContext<FournisseursDB>(options =>
-    options.UseInMemoryDatabase("FournisseursDB"));
+       options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 var app = builder.Build();
 
-// Au démarrage : créer la base de données en mémoire et la table Produits automatiquement
-using (var scope = app.Services.CreateScope()) // ouvre un accès temporaire aux services (dont appTestDB)
-{
-    var db = scope.ServiceProvider.GetRequiredService<CategorieDB>(); // récupère le contexte de base de données
-    db.Database.EnsureCreated(); // crée la base et les tables si elles n'existent pas encore
-}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

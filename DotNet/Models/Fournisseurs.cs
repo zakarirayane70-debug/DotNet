@@ -6,6 +6,7 @@ namespace appTest.Models
     {
         public int Id { get; set; }
         [Required]
+        [MaxLength(150)]
         public string? Nom { get; set; }
     }
 }
