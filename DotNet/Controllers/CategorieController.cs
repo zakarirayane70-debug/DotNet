@@ -14,7 +14,6 @@ namespace appTest.Controllers
         }
 
 
-
         // GET: CategorieController
         public IActionResult Index()
         {
@@ -54,7 +53,9 @@ namespace appTest.Controllers
 
     {
 
-            //todo 
+    
+        {
+
         {
 
             var exist = _context.Categories.SingleOrDefault(Categorie => Categorie.Id == id);
@@ -63,11 +64,13 @@ namespace appTest.Controllers
                 return NotFound();
             }
 
+
             return View(exist);
         }
         //todo    
         }
-
+ 
+        }
 
         // POST: CategorieController/Edit/5
         [HttpPost]
@@ -87,12 +90,12 @@ namespace appTest.Controllers
         }
 
 
-        // POST: CategorieController/Delete
-
 
         // POST: CategorieController/Delete
         [HttpPost]
         [ValidateAntiForgeryToken]
+
+
 
         public ActionResult Delete(int id)
         {
@@ -104,7 +107,7 @@ namespace appTest.Controllers
             _context.SaveChanges();
 
             return RedirectToAction(nameof(Index));
+
             }
         }
 }
-
