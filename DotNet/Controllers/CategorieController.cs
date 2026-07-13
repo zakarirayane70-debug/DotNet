@@ -88,25 +88,17 @@ namespace appTest.Controllers
             }
             return View(categorie);
         }
-
-
-
-        // POST: CategorieController/Delete
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-
-
-
+        
         public ActionResult Delete(int id)
         {
-            var CategorieDB = _context.Categories.SingleOrDefault(Categorie => Categorie.Id == id);
-            if (CategorieDB == null) {
+            var appTestDB = _context.Categories.SingleOrDefault(Categorie => Categorie.Id == id);
+            if (appTestDB == null) {
                 return NotFound();
             }
-            _context.Categories.Remove(CategorieDB);
+            _context.Categories.Remove(appTestDB);
             _context.SaveChanges();
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index");
 
             }
         }
