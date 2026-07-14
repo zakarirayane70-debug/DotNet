@@ -1,47 +1,55 @@
 ﻿@model IEnumerable<appTest.Models.Medicament>
-<div class="text-center">
-    <h3>Liste des médicaments</h3>
 
+    <h3>Liste des médicaments</h3>
     <p>
-        <a asp-controller="Medicament"
-           asp-action="Create" class="btn btn-primary">+ Ajouter un médicament</a>
+        <a asp-controller="Medicament" asp-action="Create" class="btn btn-primary">+ Ajouter un médicament</a>
     </p>
+<div class="row mb-3">
+    <div class="col-md-4">
+        <form  asp-action="Index" method="get" class="d-flex">
+            <input type="search"
+                   name="search"
+                   value="@Context.Request.Query["search"]"
+                   class="form-control"
+                   placeholder="Rechercher par nom ou code..." />
+            <button type="submit" class="btn btn-primary ms-2">Rechercher</button>
+            <a asp-action="Index" class="btn btn-secondary ms-2">Réinitialiser</a>
+           
+        </form>
+    </div>
+</div>
+<div class="text-center">
     <table class="table">
         <thead>
             <tr>
-
-                <th>Id</th>
                 <th>Code</th>
                 <th>Nom</th>
-                <th>Categorie Id</th>
+       
                 <th>Categorie</th>
                 <th>Prix</th>
                 <th>Quantité</th>
                 <th>Date d'expiration'</th>
-                <th>Fournisseur Id</th>
                 <th>Fournisseur</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var Medicament in Model)
             {
                <tr>
-                    <td>@Medicament.Id </td>
+                   
                     <td>@Medicament.Code</td>
                     <td>@Medicament.Nom</td>
-                    <td>@Medicament.CategorieId</td>
-                    <td>@Medicament.CategorieId</td>
-                    </div>
+       
+                    <td>@Medicament.Categorie?.Nom</td>
                     <td>@Medicament.Prix</td>
                     <td>@Medicament.Quantite</td>
                     <td>@Medicament.DateExpiration</td>
-                    <td>@Medicament.FournisseurId</td>
-                    <td>@Medicament.Fournisseur</td>
-                  <!--Sorry khltt create m3a index-->
-
+                    <td>@Medicament.Fournisseur?.Nom</td>
+                    
                     <!--chouf routage--->
                     <td>
-                        <a class="btn-secondary"
+                        <a class="btn btn-secondary ms-2"
                            asp-controller="Medicament"
                            asp-action="Edit"
                            asp-route-Id="@Medicament.Id">
@@ -51,8 +59,6 @@
                            onclick="return confirm('Voulez-vous supprimer ce produit ?');">
                             Delete
                         </a>
-
-          
                     </td>
                </tr>
             }

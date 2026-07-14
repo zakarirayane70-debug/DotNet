@@ -4,7 +4,7 @@
     <h3 class="display-4">Ajouter un medicament</h3>
 </div>
 
-<form asp-action="Create" method="post">
+<form asp-controller="Medicament" asp-action="Create" method="post">
 
     <label class="mt-4"> Code:</label>
     <input class="form-control" type="text" asp-for="Code" />
@@ -12,31 +12,27 @@
     <label class="mt-4"> Nom: </label>
     <input class="form-control" type="text" asp-for="Nom" />
     <br />
-    <label class="mt-4"> Id Categorie</label>
-    <input class="form-control" type="text" asp-for="CategorieId" />
-    <br />
+    
     <div class="form-group">
     <label asp-for="Categorie">Catégorie</label>
-    <select asp-for="Categorie" asp-items="ViewBag.CategorieId" class="form-control">
+    <select asp-for="CategorieId" asp-items="ViewBag.CategorieId" class="form-control">
         <option value="">-- Sélectionner une catégorie --</option>
     </select>
     </div>
     <br />
     <label class="mt-4">Prix: </label>
-    <input class="form-control" type="text" asp-for="Prix" />
+    <input class="form-control" type="number" asp-for="Prix" />
     <br />
     <label class="mt-4">Quantite: </label>
-    <input class="form-control" type="text" asp-for="Quantite" />
+    <input class="form-control" type="number" asp-for="Quantite" />
     <br />
     <label class="mt-4">Date d'expiration: </label>
-    <input class="form-control" type="text" asp-for="DateExpiration" />
+    <input class="form-control" type="date" asp-for="DateExpiration" />
     <br />
-    <label class="mt-4"> Id Fournisseur: </label>
-    <input class="form-control" type="text" asp-for="FournisseurId" />
-    <br />
+    
     <div class="form-group">
         <label asp-for="Fournisseur">Fournisseur</label>
-        <select asp-for="Fournisseur" asp-items="ViewBag.FournisseurId" class="form-control">
+        <select asp-for="FournisseurId" asp-items="ViewBag.FournisseurId" class="form-control">
             <option value="">-- Sélectionner un fournisseur --</option>
         </select>
     </div>

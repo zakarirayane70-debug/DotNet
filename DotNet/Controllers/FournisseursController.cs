@@ -36,7 +36,7 @@ namespace appTest.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Categories.Add(Fournisseurs);
+                _context.Fournisseurs.Add(Fournisseurs);
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
