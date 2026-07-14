@@ -14,13 +14,23 @@ namespace appTest.Controllers
             _context = context;
         }
         // GET: MedControllers
-        public ActionResult Index()
+        public ActionResult Index(string search)
         {
             var Medicaments = _context.Medicament.
                 Include(m => m.Categorie).
                 Include(m => m.Fournisseur)
                 .ToList();
-            return View(Medicaments);
+            var Medicament = _context.Medicament.AsQueryable();
+
+            if (!string.IsNullOrEmpty(search))
+            {
+                Medicament = Medicament.Where(p =>
+                    p.Nom.Contains(search) ||
+                    p.Code.ToString().Contains(search));
+            }
+
+            return View(Medicament.ToList());
+            
         }
 
         // GET: MedControllers/Details/5
@@ -77,7 +87,7 @@ namespace appTest.Controllers
         public ActionResult Edit(Medicament Medicament)
         {
 
-            var exist = _context.Medicament.SingleOrDefault(Medicaments => Medicaments.Id == Medicaments.Id);
+            var exist = _context.Medicament.SingleOrDefault(Medicament => Medicament.Id == Medicament.Id);
             if (exist == null)
             {
                 return NotFound();
@@ -115,18 +125,6 @@ namespace appTest.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
-        public IActionResult Indexo(string search)
-        {
-            var Medicament = _context.Medicament.AsQueryable();
-
-            if (!string.IsNullOrEmpty(search))
-            {
-                Medicament = Medicament.Where(p =>
-                    p.Nom.Contains(search) ||
-                    p.Code.ToString().Contains(search));
-            }
-
-            return View(Medicament.ToList());
-        }
+     
     }
 }

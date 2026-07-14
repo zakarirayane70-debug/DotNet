@@ -61,7 +61,7 @@ namespace appTest.Controllers
         public ActionResult Edit(Fournisseurs Fournisseurs)
         {
 
-            var exist = _context.Fournisseurs.SingleOrDefault(Fournisseurs => Fournisseurs.Id == Fournisseurs.Id);
+            var exist = _context.Fournisseurs.SingleOrDefault(Fournisseur => Fournisseur.Id == Fournisseurs.Id);
             if (exist == null)
             {
                 return NotFound();
