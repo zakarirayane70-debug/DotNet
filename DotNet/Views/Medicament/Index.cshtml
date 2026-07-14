@@ -25,28 +25,19 @@
         <tbody>
             @foreach (var Medicament in Model)
             {
-                <tr>
+               <tr>
                     <td>@Medicament.Id </td>
                     <td>@Medicament.Code</td>
                     <td>@Medicament.Nom</td>
                     <td>@Medicament.CategorieId</td>
-                    <div class="form-group">
-                        <label asp-for="@Medicament.Categorie">Catégorie</label>
-                        <select asp-for="@Medicament.Categorie" asp-items="ViewBag.CategorieId" class="form-control">
-                            <option value="">-- Sélectionner une catégorie --</option>
-                        </select>
+                    <td>@Medicament.CategorieId</td>
                     </div>
                     <td>@Medicament.Prix</td>
                     <td>@Medicament.Quantite</td>
                     <td>@Medicament.DateExpiration</td>
                     <td>@Medicament.FournisseurId</td>
-                    <div class="form-group">
-                        <label asp-for="@Medicament.Fournisseur">Fournisseur</label>
-                        <select asp-for="@Medicament.Fournisseur" asp-items="ViewBag.FournisseurId" class="form-control">
-                            <option value="">-- Sélectionner un fournisseur --</option>
-                        </select>
-                    </div>
-                  
+                    <td>@Medicament.Fournisseur</td>
+                  <!--Sorry khltt create m3a index-->
 
                     <!--chouf routage--->
                     <td>
@@ -63,9 +54,9 @@
 
           
                     </td>
-                </tr>
+               </tr>
             }
         </tbody>
     </table>
-
+            
 </div>

@@ -5,8 +5,40 @@
 </div>
 <form asp-action="Edit" method="post">
     <h3>Modifier </h3>
-    <label class="mt-4"> Nom:</label>
-    <input class="form-control" type="text" asp-for="Nom" />
+        <label class="mt-4"> Code:</label>
+        <input class="form-control" type="text" asp-for="Code" />
+        <br />
+        <label class="mt-4"> Nom: </label>
+        <input class="form-control" type="text" asp-for="Nom" />
+        <br />
+        <label class="mt-4"> Id Categorie</label>
+        <input class="form-control" type="text" asp-for="CategorieId" />
+        <br />
+        <div class="form-group">
+            <label asp-for="Categorie">Catégorie</label>
+            <select asp-for="Categorie" asp-items="ViewBag.CategorieId" class="form-control">
+                <option value="">-- Sélectionner une catégorie --</option>
+            </select>
+        </div>
+        <br />
+        <label class="mt-4">Prix: </label>
+        <input class="form-control" type="text" asp-for="Prix" />
+        <br />
+        <label class="mt-4">Quantite: </label>
+        <input class="form-control" type="text" asp-for="Quantite" />
+        <br />
+        <label class="mt-4">Date d'expiration: </label>
+        <input class="form-control" type="text" asp-for="DateExpiration" />
+        <br />
+        <label class="mt-4"> Id Fournisseur: </label>
+        <input class="form-control" type="text" asp-for="FournisseurId" />
+        <br />
+        <div class="form-group">
+            <label asp-for="Fournisseur">Fournisseur</label>
+            <select asp-for="Fournisseur" asp-items="ViewBag.FournisseurId" class="form-control">
+                <option value="">-- Sélectionner un fournisseur --</option>
+            </select>
+         </div>
     <br />
     <br />
     <button type="submit">enregistrer</button>

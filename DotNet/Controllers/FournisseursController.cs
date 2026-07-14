@@ -34,10 +34,9 @@ namespace appTest.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Fournisseurs Fournisseurs)
         {
-
             if (ModelState.IsValid)
             {
-                _context.Fournisseurs.Add(Fournisseurs);
+                _context.Categories.Add(Fournisseurs);
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
