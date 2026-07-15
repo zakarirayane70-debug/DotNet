@@ -50,25 +50,15 @@ namespace appTest.Controllers
         }
         // GET: CategorieController/Edit/5
         public ActionResult Edit(int id)
-
-    {
-
-    
-        {
-
-        {
-
-            var exist = _context.Categories.SingleOrDefault(Categorie => Categorie.Id == id);
-            if (exist == null)
-            {
-                return NotFound();
-            }
-
-
-            return View(exist);
-        }
-        //todo    
-        }
+   {
+          {
+              var exist = _context.Categories.SingleOrDefault(Categorie => Categorie.Id == id);
+                if (exist == null)
+                {
+                    return NotFound();
+                }
+               return View(exist);
+           }    
  
         }
 

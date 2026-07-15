@@ -14,5 +14,6 @@ namespace appTest.Models
         public DbSet<Medicament> Medicament{ get; set; }
         public DbSet<Fournisseurs> Fournisseurs { get; set; }
         public DbSet<Categorie> Categories { get; set; }
+        public DbSet<Stock> Stocks { get; set; }
     }
 }

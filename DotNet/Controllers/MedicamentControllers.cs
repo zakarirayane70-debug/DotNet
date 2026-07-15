@@ -16,12 +16,10 @@ namespace appTest.Controllers
         // GET: MedControllers
         public ActionResult Index(string search,int? FournisseurId,int? CategorieId)
         {
-            var Medicaments = _context.Medicament.
+            var Medicament = _context.Medicament.
                 Include(m => m.Categorie).
                 Include(m => m.Fournisseur)
-                .ToList();
-            var Medicament = _context.Medicament.AsQueryable();
-
+                .AsQueryable();
             if (!string.IsNullOrEmpty(search))
             {
                 Medicament = Medicament.Where(p =>
@@ -36,8 +34,8 @@ namespace appTest.Controllers
             {
                 Medicament = Medicament.Where(m => m.FournisseurId == FournisseurId);
             }
-            ViewBag.Categories = new SelectList(_context.Categories,"Id","Nom") ;
-            ViewBag.Fournisseurs = new SelectList(_context.Fournisseurs, "Id", "Nom");
+            ViewBag.Categories = new SelectList(_context.Categories,"Id","Nom","CategorieId") ;
+            ViewBag.Fournisseurs = new SelectList(_context.Fournisseurs, "Id", "Nom", "FournisseurId");
 
             return View(Medicament.ToList());
             
@@ -94,10 +92,10 @@ namespace appTest.Controllers
         // POST: MedControllers/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Medicament Medicament)
+        public ActionResult Edit(Medicament medicament)
         {
 
-            var exist = _context.Medicament.SingleOrDefault(Medicament => Medicament.Id == Medicament.Id);
+            var exist = _context.Medicament.SingleOrDefault(m => m.Id == medicament.Id);
             if (exist == null)
             {
                 return NotFound();
@@ -105,22 +103,21 @@ namespace appTest.Controllers
 
             if (ModelState.IsValid)
             {
-                exist.Id = Medicament.Id;
-                exist.Code = Medicament.Code;
-                exist.Nom = Medicament.Nom;
-                exist.CategorieId = Medicament.CategorieId;
-                exist.Prix = Medicament.Prix;
-                exist.Quantite = Medicament.Quantite;
-                exist.DateExpiration = Medicament.DateExpiration;
-                exist.FournisseurId = Medicament.FournisseurId;
+                exist.Id = medicament.Id;
+                exist.Code = medicament.Code;
+                exist.Nom = medicament.Nom;
+                exist.CategorieId = medicament.CategorieId;
+                exist.Prix = medicament.Prix;
+                exist.Quantite = medicament.Quantite;
+                exist.DateExpiration = medicament.DateExpiration;
+                exist.FournisseurId = medicament.FournisseurId;
 
                 _context.SaveChanges();
-                return RedirectToAction(nameof(Index));
-
+                return RedirectToAction("Index");
             }
-            ViewBag.CategorieId = new SelectList(_context.Categories, "Id", "Nom", Medicament.CategorieId);
-            ViewBag.FournisseurId = new SelectList(_context.Fournisseurs, "Id", "Nom", Medicament.FournisseurId);
-            return View(Medicament);
+            ViewBag.CategorieId = new SelectList(_context.Categories, "Id", "Nom", medicament.CategorieId);
+            ViewBag.FournisseurId = new SelectList(_context.Fournisseurs, "Id", "Nom", medicament.FournisseurId);
+            return View(medicament);
         }
 
         // GET: MedControllers/Delete/5

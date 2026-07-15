@@ -1,0 +1,31 @@
+﻿@model appTest.Models.Stock
+
+<div class="text-center">
+    <h3 class="display-4">Ajouter au stock</h3>
+</div>
+
+<form asp-controller="Stock" asp-action="Create" method="post">
+
+
+    <div class="form-group">
+        <label asp-for="MedicamentId">Médicament:</label>
+        <select asp-for="MedicamentId" asp-items="ViewBag.Medicament" class="form-control">
+            <option value="">-- Sélectionner une catégorie --</option>
+        </select>
+    </div>
+    <br />
+    <label class="mt-4"> Type:</label>
+    <input class="form-control" type="text" asp-for="Type" />
+    <br />
+    <label class="mt-4"> Quantite:</label>
+    <input class="form-control" type="number" asp-for="Quantite" />
+    <br />
+    <label class="mt-4"> DateStock:</label>
+    <input class="form-control" type="date" asp-for="DateStock" />
+    <br /> <label class="mt-4"> Motif</label>
+    <input class="form-control" type="text" asp-for="Motif" />
+    <br />
+    <button type="submit">enregistrer</button>
+    <button type="reset">supprimer</button>
+    <a asp-action="Index">Annuler</a>
+</form>

@@ -31,10 +31,3 @@ namespace appTest.Models
             public Fournisseurs? Fournisseur { get; set; }
         }
     }
-
-/*Id 
-    CategorieId INT NOT NULL,
-    Prix DECIMAL(10,2) NOT NULL,
-    Quantite INT NOT NULL,
-    DateExpiration DATE NOT NULL,
-    FournisseurId INT NOT NULL,*/
