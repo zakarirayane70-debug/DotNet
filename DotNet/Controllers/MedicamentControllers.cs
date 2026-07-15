@@ -14,7 +14,7 @@ namespace appTest.Controllers
             _context = context;
         }
         // GET: MedControllers
-        public ActionResult Index(string search)
+        public ActionResult Index(string search,int? FournisseurId,int? CategorieId)
         {
             var Medicaments = _context.Medicament.
                 Include(m => m.Categorie).
@@ -28,6 +28,16 @@ namespace appTest.Controllers
                     p.Nom.Contains(search) ||
                     p.Code.ToString().Contains(search));
             }
+            if (CategorieId.HasValue)
+            {
+                Medicament = Medicament.Where(m => m.CategorieId == CategorieId);
+            }
+            if(FournisseurId.HasValue)
+            {
+                Medicament = Medicament.Where(m => m.FournisseurId == FournisseurId);
+            }
+            ViewBag.Categories = new SelectList(_context.Categories,"Id","Nom") ;
+            ViewBag.Fournisseurs = new SelectList(_context.Fournisseurs, "Id", "Nom");
 
             return View(Medicament.ToList());
             
@@ -125,6 +135,5 @@ namespace appTest.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
-     
     }
 }

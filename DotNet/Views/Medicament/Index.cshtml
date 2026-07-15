@@ -1,11 +1,33 @@
 ﻿@model IEnumerable<appTest.Models.Medicament>
 
     <h3>Liste des médicaments</h3>
+    <div class="ajouter">
     <p>
         <a asp-controller="Medicament" asp-action="Create" class="btn btn-primary">+ Ajouter un médicament</a>
     </p>
-    <button>Fournisseur</button>
-    <button>Categorie</button>
+</div>
+<select class="form-select" name="CategorieId" asp-items="ViewBag.Categorie">
+<option value="">Toutes les catégories</option>
+<option value="Antibiotiques"> Antibiotiques</option>
+<option value="Antalgiques"> Antalgiques</option>
+<option value="Vitamines"> Vitamines</option>
+<option value="Dermocosmétiques"> Dermocosmétiques</option>
+<option value="Anti-inflammatoires"> Anti-inflammatoires</option>
+<option value="Antihistaminiques">Antihistaminiques </option>
+<option value="Antidiabétiques">Antidiabétiques </option>
+<option value="Cardiologie"> Cardiologie</option>
+</select>
+<select class="form-select" name="FournisseurId" asp-items="ViewBag.Fournisseurs">
+<option value="">Bottu </option>
+<option value=""> Cooper Pharma</option>
+<option value=""> Sothema</option>
+<option value="Laprophan"> Laprophan</option>
+<option value="Sanofi Maroc">Sanofi Maroc </option>
+<option value="Pharma 5"> Pharma 5</option>
+<option value="Pfizer">Pfizer </option>
+<option value="Roche">Roche </option>
+</select>
+<button type="submit" class="btn btn-primary ms-2">Rechercher</button>
 <div class="row mb-3">
     <div class="col-md-4">
         <form  asp-action="Index" method="get" class="d-flex">
@@ -18,7 +40,8 @@
             <a asp-action="Index" class="btn btn-secondary ms-2">Réinitialiser</a>
            
         </form>
-    </div>
+	</div>
+    
 </div>
 <div class="text-center">
     <table class="table">
