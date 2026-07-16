@@ -1,28 +1,26 @@
 ﻿@model IEnumerable<appTest.Models.Stock>
 
-<h3>Liste des médicaments</h3>
+<h3>Liste de stock</h3>
 <div class="ajouter">
     <p>
-        <a asp-controller="Medicament" asp-action="Create" class="btn btn-primary">+ Ajouter un médicament</a>
+        <a asp-controller="Stock" asp-action="Create" class="btn btn-primary">+ Ajouter au stock</a>
     </p>
 </div>
 <form method="get" asp-action="Index">
     <div>
-        <select class="form-select" name="CategorieId" asp-items="ViewBag.Categories">
-            <option value="">Toutes les catégories</option>
-        </select>
+            <select class="form-select" name="Type">
+                <option value="">Type</option>
+                <option value="Entree">Entrée</option>
+                <option value="Sortie">Sortie</option>
+            </select>
     </div>
-    <div>
-        <select class="form-select" name="FournisseurId" asp-items="ViewBag.Fournisseurs">
-            <option value="">Tous les fournisseurs</option>
-        </select>
-    </div>
+
     <div>
         <input type="search"
                name="search"
                value="@Context.Request.Query["search"]"
                class="form-control"
-               placeholder="Rechercher par nom ou code..." />
+               placeholder="Rechercher..." />
     </div>
     <div>
         <button type="submit" class="btn btn-primary">Rechercher</button>
@@ -38,7 +36,6 @@
 
                 <th>Quantite</th>
                 <th>DateStock</th>
-                <th>Date </th>
                 <th>Motif</th>
                 <th>Action</th>
             </tr>
@@ -48,20 +45,22 @@
             {
                 <tr>
 
-                    <td>@Stock.MedicamentId.Nom</td>
-                    <td>@Stock.Type</td>
+                    <td>@Stock.Medicament?.Nom</td>
+                    <td class="@(Stock.Type == "Entrée"? "text-success" : "text-danger")">
+                        @Stock.Type
+                    </td>
                     <td>@Stock.Quantite</td>
                     <td>@Stock.DateStock.ToString("dd/MM/yyyy")</td>
-                    <td>@Stock.Motif?</td>
+                    <td>@Stock.Motif</td>
                     <!--chouf routage--->
                     <td>
                         <a class="btn btn-secondary ms-2"
-                           asp-controller="Medicament"
+                           asp-controller="Stock"
                            asp-action="Edit"
                            asp-route-Id="@Stock.Id">
                             Edit
                         </a>
-                        <a class="btn btn-primary" asp-controller="Stock" asp-action="Delete" asp-route-id="Stock.Id"
+                        <a class="btn btn-primary" asp-controller="Stock" asp-action="Delete" asp-route-id="@Stock.Id"
                            onclick="return confirm('Voulez-vous supprimer ce produit ?');">
                             Delete
                         </a>
@@ -71,4 +70,4 @@
         </tbody>
     </table>
 
-</d
+</div>

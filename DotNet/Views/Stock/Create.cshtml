@@ -8,14 +8,20 @@
 
 
     <div class="form-group">
-        <label asp-for="MedicamentId">Médicament:</label>
-        <select asp-for="MedicamentId" asp-items="ViewBag.Medicament" class="form-control">
-            <option value="">-- Sélectionner une catégorie --</option>
+        <label asp-for="Medicament">Médicament:</label>
+        <select asp-for="MedicamentId" asp-items="ViewBag.MedicamentId" class="form-control">
+            <option value="">-- Sélectionner un medicament --</option>
         </select>
     </div>
     <br />
-    <label class="mt-4"> Type:</label>
-    <input class="form-control" type="text" asp-for="Type" />
+    <div class="form-group">
+        <label asp-for="Type">Type:</label>
+        <select asp-for="Type" class="form-control">
+            <option value="">-- Sélectionner le type --</option>
+            <option value="Entree" >Entrée</option>
+            <option value="Sortie" >Sortie</option>
+            </select>
+            </div>
     <br />
     <label class="mt-4"> Quantite:</label>
     <input class="form-control" type="number" asp-for="Quantite" />

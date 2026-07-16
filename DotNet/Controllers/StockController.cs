@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Collections;
 namespace appTest.Controllers
 {
     public class StockController : Controller
@@ -14,10 +15,22 @@ namespace appTest.Controllers
             _context = context;
         }
         // GET: StockController
-        public ActionResult Index()
+        public ActionResult Index(string search,int? MedicamentId )
         {
-            var stocks = _context.Stocks.ToList();
-            return View(stocks);
+            var stocks = _context.Stocks.Include(m => m.Medicament).AsQueryable();
+            if (!string.IsNullOrEmpty(search))
+            {
+                stocks = stocks.Where(p => p.Medicament.Nom.Contains(search) );
+
+                stocks = stocks.Where(p => p.Medicament.Nom.Contains(search));
+            }
+            if (MedicamentId.HasValue)
+            {
+                stocks = stocks.Where(m => m.MedicamentId == MedicamentId.Value);
+            }
+
+            ViewBag.Stocks = new SelectList(_context.Stocks, "Id", "Nom", "MedicamentId");
+            return View(stocks.ToList());
         }
 
         // GET: StockController/Details/5
@@ -29,6 +42,7 @@ namespace appTest.Controllers
         // GET: StockController/Create
         public ActionResult Create()
         {
+            ViewBag.MedicamentId = new SelectList(_context.Medicament, "Id", "Nom");
             return View();
         }
 
@@ -44,8 +58,8 @@ namespace appTest.Controllers
                     _context.SaveChanges();
                     return RedirectToAction(nameof(Index));
                 }
-                return View(stock);
-            
+            ViewBag.MedicamentId = new SelectList(_context.Medicament, "Id", "Nom", stock.MedicamentId);
+            return View(stock);         
         }
 
         // GET: StockController/Edit/5
@@ -56,7 +70,7 @@ namespace appTest.Controllers
             {
                 return NotFound();
             }
-
+            ViewBag.MedicamentId = new SelectList(_context.Medicament, "Id", "Nom", exist.MedicamentId);
 
             return View(exist);
         }
@@ -67,7 +81,8 @@ namespace appTest.Controllers
         public ActionResult Edit(Stock stock)
         {
             var exist = _context.Stocks.SingleOrDefault(s => s.Id == stock.Id);
-            if (exist==null){
+            if (exist==null)
+            {
                 return NotFound();
             }
             if (ModelState.IsValid)
@@ -78,10 +93,11 @@ namespace appTest.Controllers
                 exist.Quantite = stock.Quantite;
                 exist.DateStock = stock.DateStock;
                 exist.Motif = stock.Motif;
+                exist.Medicament = stock.Medicament;
                 _context.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             }
-            ViewBag.MedicamentId = new SelectList(_context.Medicament, "Nom", stock.MedicamentId);
+            ViewBag.MedicamentId = new SelectList(_context.Medicament,"Id", "Nom", stock.MedicamentId);
             return View(stock);
         }
         
@@ -94,12 +110,10 @@ namespace appTest.Controllers
             {
                 return NotFound();
             }
-            _context.Categories.Remove(exist);
+            _context.Stocks.Remove(exist);
             _context.SaveChanges();
 
             return RedirectToAction("Index");
         }
-
-
     }
 }
