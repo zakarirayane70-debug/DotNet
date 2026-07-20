@@ -15,10 +15,17 @@
     </div>
     <br />
     <div class="form-group">
+        <label asp-for="Fournisseur">Fournisseur</label>
+        <select asp-for="FournisseurId" asp-items="ViewBag.FournisseurId" class="form-control">
+            <option value="">-- Sélectionner un fournisseur --</option>
+        </select>
+    </div>
+    <br />
+    <div class="form-group">
         <label asp-for="Type">Type:</label>
         <select asp-for="Type" class="form-control">
             <option value="">-- Sélectionner le type --</option>
-            <option value="Entree" >Entrée</option>
+            <option value="Entrée" >Entrée</option>
             <option value="Sortie" >Sortie</option>
             </select>
             </div>

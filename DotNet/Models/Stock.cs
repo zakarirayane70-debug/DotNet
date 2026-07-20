@@ -22,6 +22,9 @@ namespace appTest.Models
         public string? Motif {  get; set;}
         [MaxLength(250)]
         public Medicament? Medicament { get; set; }
+        public int FournisseurId { get; set; }
+        [ForeignKey("FournisseurId")]
+        public Fournisseurs? Fournisseur { get; set; } 
         
     }
 }

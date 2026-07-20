@@ -6,24 +6,25 @@
         <a asp-controller="Medicament" asp-action="Create" class="btn btn-primary">+ Ajouter un médicament</a>
     </p>
 </div>
-<form method="get" asp-action="Index">
-    <div>
-        <select class="form-select" name="CategorieId" asp-items="ViewBag.Categories">
-            <option value="">Toutes les catégories</option>
-        </select>
-    </div>
-    <div>
-        <select class="form-select" name="FournisseurId" asp-items="ViewBag.Fournisseurs">
-            <option value="">Tous les fournisseurs</option>
-        </select>
-    </div>
-    <div>
+<form method="get" asp-action="Index" class="row g-3 mb-3">
+    <div class="col-md-4">
         <input type="search"
                name="search"
                value="@Context.Request.Query["search"]"
                class="form-control"
                placeholder="Rechercher par nom ou code..." />
     </div>
+    <div class="col-md-4">
+        <select class="form-select" name="CategorieId" asp-items="ViewBag.Categories">
+            <option value="">Toutes les catégories</option>
+        </select>
+    </div>
+    <div class="col-md-4">
+        <select class="form-select" name="FournisseurId" asp-items="ViewBag.Fournisseurs">
+            <option value="">Tous les fournisseurs</option>
+        </select>
+    </div>
+
     <div>
         <button type="submit" class="btn btn-primary">Rechercher</button>
         <a asp-action="Index" class="btn btn-secondary ms-2">Réinitialiser</a>

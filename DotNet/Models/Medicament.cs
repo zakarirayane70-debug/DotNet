@@ -25,7 +25,6 @@ namespace appTest.Models
             public int Quantite { get; set; }
 
             public DateTime DateExpiration { get; set; }
-
             public int FournisseurId { get; set; }
             [ForeignKey("FournisseurId")]
             public Fournisseurs? Fournisseur { get; set; }

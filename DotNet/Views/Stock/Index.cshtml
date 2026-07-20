@@ -1,27 +1,40 @@
 ﻿@model IEnumerable<appTest.Models.Stock>
 
 <h3>Liste de stock</h3>
+
 <div class="ajouter">
     <p>
         <a asp-controller="Stock" asp-action="Create" class="btn btn-primary">+ Ajouter au stock</a>
     </p>
 </div>
-<form method="get" asp-action="Index">
-    <div>
-            <select class="form-select" name="Type">
-                <option value="">Type</option>
-                <option value="Entree">Entrée</option>
-                <option value="Sortie">Sortie</option>
-            </select>
-    </div>
-
-    <div>
+<form method="get" asp-action="Index" class="row g-3 mb-3">
+    <div class="col-md-4">
         <input type="search"
                name="search"
                value="@Context.Request.Query["search"]"
                class="form-control"
-               placeholder="Rechercher..." />
+               placeholder="Rechercher par medicament..." />
     </div>
+    <div class="col-md-4">
+        <select class="form-select" name="annee">
+            <option value="">Année</option>
+            @foreach (var a in (List<int>)ViewBag.Annees)
+            {
+                <option value="@a" selected="@(Context.Request.Query["annee"] == a.ToString())">
+                    @a
+                </option>
+            }
+        </select>
+    </div>
+    <div class="col-md-4">
+            <select class="form-select" name="Type">
+                <option value="">Type</option>
+                <option value="Entrée">Entrée</option>
+                <option value="Sortie">Sortie</option>
+            </select>
+    </div>
+
+
     <div>
         <button type="submit" class="btn btn-primary">Rechercher</button>
         <a asp-action="Index" class="btn btn-secondary ms-2">Réinitialiser</a>
@@ -32,8 +45,9 @@
         <thead>
             <tr>
                 <th>Medicament</th>
+                <th>Fournisseur</th>
                 <th>Type</th>
-
+    
                 <th>Quantite</th>
                 <th>DateStock</th>
                 <th>Motif</th>
@@ -46,9 +60,11 @@
                 <tr>
 
                     <td>@Stock.Medicament?.Nom</td>
+                    <td>@Stock.Fournisseur?.Nom</td>
                     <td class="@(Stock.Type == "Entrée"? "text-success" : "text-danger")">
                         @Stock.Type
                     </td>
+                    
                     <td>@Stock.Quantite</td>
                     <td>@Stock.DateStock.ToString("dd/MM/yyyy")</td>
                     <td>@Stock.Motif</td>

@@ -38,7 +38,7 @@ namespace appTest.Controllers
             ViewBag.Fournisseurs = new SelectList(_context.Fournisseurs, "Id", "Nom", "FournisseurId");
 
             return View(Medicament.ToList());
-            
+           
         }
 
         // GET: MedControllers/Details/5
@@ -51,7 +51,7 @@ namespace appTest.Controllers
         public ActionResult Create()
         {
             ViewBag.CategorieId = new SelectList(
-     _context.Categories, "Id", "Nom");
+           _context.Categories, "Id", "Nom");
             ViewBag.FournisseurId = new SelectList(_context.Fournisseurs, "Id", "Nom");
             return View();
         }
@@ -69,7 +69,7 @@ namespace appTest.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewBag.CategorieId = new SelectList(
-     _context.Categories, "Id", "Nom", Medicament.CategorieId);
+            _context.Categories, "Id", "Nom", Medicament.CategorieId);
             ViewBag.FournisseurId = new SelectList(_context.Fournisseurs, "Id", "Nom", Medicament.FournisseurId);
             return View(Medicament);
         }

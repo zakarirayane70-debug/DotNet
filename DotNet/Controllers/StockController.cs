@@ -15,21 +15,32 @@ namespace appTest.Controllers
             _context = context;
         }
         // GET: StockController
-        public ActionResult Index(string search,int? MedicamentId )
+        public ActionResult Index(string search,int? MedicamentId,string type,int? annee, int? FournisseurId)
         {
-            var stocks = _context.Stocks.Include(m => m.Medicament).AsQueryable();
+            var stocks = _context.Stocks.Include(m => m.Medicament).Include(m => m.Fournisseur).AsQueryable();
             if (!string.IsNullOrEmpty(search))
             {
                 stocks = stocks.Where(p => p.Medicament.Nom.Contains(search) );
-
-                stocks = stocks.Where(p => p.Medicament.Nom.Contains(search));
             }
             if (MedicamentId.HasValue)
             {
                 stocks = stocks.Where(m => m.MedicamentId == MedicamentId.Value);
             }
-
+            if (!string.IsNullOrEmpty(type))
+            {
+                stocks = stocks.Where(m => m.Type==type);
+            }
+            if (annee.HasValue)
+            {
+                stocks = stocks.Where(s => s.DateStock.Year == annee.Value);
+            }
+            if (FournisseurId.HasValue)
+            {
+                stocks = stocks.Where(m => m.FournisseurId == FournisseurId);
+            }
+            ViewBag.Fournisseurs = new SelectList(_context.Fournisseurs, "Id", "Nom", "FournisseurId");
             ViewBag.Stocks = new SelectList(_context.Stocks, "Id", "Nom", "MedicamentId");
+            ViewBag.Annees = _context.Stocks.Select(s => s.DateStock.Year).Distinct().OrderByDescending(y => y).ToList();
             return View(stocks.ToList());
         }
 
@@ -43,6 +54,7 @@ namespace appTest.Controllers
         public ActionResult Create()
         {
             ViewBag.MedicamentId = new SelectList(_context.Medicament, "Id", "Nom");
+            ViewBag.FournisseurId = new SelectList(_context.Fournisseurs, "Id", "Nom");
             return View();
         }
 
@@ -51,7 +63,6 @@ namespace appTest.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Stock stock)
         {
-            
                 if (ModelState.IsValid)
                 {
                     _context.Stocks.Add(stock);
@@ -59,6 +70,7 @@ namespace appTest.Controllers
                     return RedirectToAction(nameof(Index));
                 }
             ViewBag.MedicamentId = new SelectList(_context.Medicament, "Id", "Nom", stock.MedicamentId);
+            ViewBag.FournisseurId = new SelectList(_context.Fournisseurs, "Id", "Nom", stock.FournisseurId);
             return View(stock);         
         }
 
